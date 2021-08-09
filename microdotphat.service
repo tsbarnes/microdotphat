@@ -1,0 +1,12 @@
+[Unit]
+Description=Micro Dot PHat
+After=local-fs.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/Pimoroni/microdotphat/graph.py
+Restart=always
+
+[Install]
+WantedBy=default.target
+

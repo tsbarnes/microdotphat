@@ -4,7 +4,8 @@ After=local-fs.target network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python /home/pi/Pimoroni/microdotphat/graph.py
+ExecStart=/usr/bin/python3 /home/pi/Pimoroni/microdotphat/graph.py
+User=pi
 Restart=always
 
 [Install]

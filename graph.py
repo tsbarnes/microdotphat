@@ -38,7 +38,7 @@ class Graph:
     def main_loop(self):
         while True:
             self.iterate_loop()
-            sleep(5)
+            sleep(1)
 
 
 if __name__ == '__main__':

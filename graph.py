@@ -2,7 +2,6 @@
 
 import os
 from time import sleep
-from random import randint
 
 from microdotphat import set_col, show, clear
 
@@ -19,7 +18,6 @@ filled = True
 
 while True:
     clear()
-    #print(int(round(os.getloadavg()[0] * 2)))
     graph += [int(round(os.getloadavg()[0] * 2))]
     while len(graph) > 45:
         graph.pop(0)
@@ -39,4 +37,4 @@ while True:
             set_col(x, 1 << (7-val))
 
     show()
-    sleep(5.00)
+    sleep(2.00)

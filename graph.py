@@ -19,7 +19,6 @@ class Graph:
 
     def iterate_loop(self):
         clear()
-        print(LoadAverage(minutes=1).load_average)
         self.graph += [int(LoadAverage(minutes=1).load_average)]
         while len(self.graph) > 45:
             self.graph.pop(0)
@@ -43,7 +42,7 @@ class Graph:
     def main_loop(self):
         while True:
             self.iterate_loop()
-            sleep(1)
+            sleep(5)
 
 
 if __name__ == '__main__':

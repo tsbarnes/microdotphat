@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import os
 from time import sleep
+from gpiozero import LoadAverage
 
 from microdotphat import set_col, show, clear
 
@@ -18,7 +18,8 @@ filled = True
 
 while True:
     clear()
-    graph += [int(round(os.getloadavg()[0] * 2))]
+    print(LoadAverage(minutes=1).load_average)
+    graph += [int(LoadAverage(minutes=1).load_average)]
     while len(graph) > 45:
         graph.pop(0)
 
@@ -37,4 +38,3 @@ while True:
             set_col(x, 1 << (7-val))
 
     show()
-    sleep(2.00)

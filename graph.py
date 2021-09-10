@@ -1,16 +1,8 @@
 #!/usr/bin/env python
+
+import psutil
 from time import sleep
-
-from gpiozero import LoadAverage
 from microdotphat import set_col, show, clear
-
-
-print("""Graph
-
-Plots load average across the screen in a bar graph.
-
-Press Ctrl+C to exit.
-""")
 
 
 class Graph:
@@ -19,13 +11,17 @@ class Graph:
 
     def iterate_loop(self):
         clear()
-        self.graph += [int(LoadAverage(minutes=1).load_average)]
+
+        cpu_percent = psutil.cpu_percent()
+        pixels = int(cpu_percent / 12.5) - 1
+
+        self.graph += [pixels]
         while len(self.graph) > 45:
             self.graph.pop(0)
 
-        for x, val in enumerate(self.graph):
+        for index, value in enumerate(self.graph):
             if self.filled:
-                set_col(x + (45-len(self.graph)), [
+                set_col(index + (45 - len(self.graph)), [
                     0,
                     0b1000000,
                     0b1100000,
@@ -33,9 +29,9 @@ class Graph:
                     0b1111000,
                     0b1111100,
                     0b1111110,
-                    0b1111111][val])
+                    0b1111111][value])
             else:
-                set_col(x, 1 << (7-val))
+                set_col(index, 1 << (7 - value))
 
         show()
 

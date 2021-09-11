@@ -9,7 +9,7 @@ try:
     from local_settings import MODULES
 except ImportError:
     MODULES = [
-        'thermal',
-        'graph',
-        'scrolling_text',
+        'apps.thermal',
+        'apps.graph',
+        'apps.scrolling_text',
     ]

@@ -14,7 +14,6 @@ class App:
         microdotphat.clear()
         self.file = open(self.path, "r")
         self.temp_raw = int(self.file.read().strip())
-        logging.debug(self.temp_raw)
         self.temp = float(self.temp_raw / 1000.0)
         microdotphat.write_string("%.2f" % self.temp + "c", kerning=False)
         microdotphat.show()

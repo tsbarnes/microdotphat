@@ -1,9 +1,12 @@
 import logging
 
-LOGLEVEL = logging.DEBUG
+LOGLEVEL = logging.INFO
 
 MODULES = [
     'thermal',
     'graph',
     'scrolling_text',
 ]
+
+SCROLLING_TEXT_DEFAULT = " Waiting "
+WEBTEXT_DEFAULT = " Waiting "

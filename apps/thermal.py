@@ -2,9 +2,10 @@
 import logging
 import time
 import microdotphat
+from apps import AbstractApp
 
 
-class App:
+class App(AbstractApp):
     path = "/sys/class/thermal/thermal_zone0/temp"
     file = None
     temp_raw = None

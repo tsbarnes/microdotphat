@@ -1,4 +1,5 @@
 import logging
+from apps import get_apps
 
 try:
     from local_settings import LOGLEVEL
@@ -8,8 +9,14 @@ except ImportError:
 try:
     from local_settings import MODULES
 except ImportError:
-    MODULES = [
-        'apps.thermal',
-        'apps.graph',
-        'apps.scrolling_text',
-    ]
+    MODULES = get_apps()
+
+try:
+    from local_settings import SCROLLING_TEXT_DEFAULT
+except ImportError:
+    SCROLLING_TEXT_DEFAULT = " Waiting "
+
+try:
+    from local_settings import WEBTEXT_DEFAULT
+except ImportError:
+    WEBTEXT_DEFAULT = " Waiting "

@@ -4,9 +4,10 @@ import sys
 import time
 import microdotphat
 import socket
+from apps import AbstractApp
 
 
-class App:
+class App(AbstractApp):
     text = " * " + socket.gethostname() + " *  "
 
     def write(self, text=None):

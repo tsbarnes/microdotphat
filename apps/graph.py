@@ -1,18 +1,23 @@
 #!/usr/bin/env python
 import psutil
 import time
+import logging
 from microdotphat import set_col, show, clear
+from apps import AbstractApp
 
 
-class App:
+class App(AbstractApp):
     graph = []
     filled = True
 
     def run_once(self):
         clear()
 
-        cpu_percent = psutil.cpu_percent()
-        pixels = int(cpu_percent / 12.5) - 1
+        load_average = psutil.getloadavg()[0]
+        pixels = int(load_average * 3)
+        if pixels > 7:
+            logging.warning("Load Average: {0} results in {1} pixels, max is 7".format(load_average, pixels))
+            pixels = 7
 
         self.graph += [pixels]
         while len(self.graph) > 45:

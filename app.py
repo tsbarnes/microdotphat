@@ -6,7 +6,7 @@ import importlib
 import settings
 
 
-class App:
+class MicroDotPHAT:
     modules = []
 
     apps = []
@@ -29,6 +29,7 @@ class App:
     def change_app(self, index):
         self.current_app = self.apps[index]
         self.current_app_index = index
+        self.current_app.reload()
 
     def run(self):
         self.current_app.run_once()
@@ -59,7 +60,7 @@ class App:
 
 
 if __name__ == '__main__':
-    app = App()
+    app = MicroDotPHAT()
 
     while True:
         app.run()

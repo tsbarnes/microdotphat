@@ -1,3 +1,6 @@
+import logging
+
+LOGLEVEL = logging.DEBUG
 MODULES = [
     'thermal',
     'graph',

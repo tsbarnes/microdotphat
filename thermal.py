@@ -10,15 +10,14 @@ class App:
     temp_raw = None
     temp = None
 
-    def __init__(self):
+    def run_once(self):
         microdotphat.clear()
         self.file = open(self.path, "r")
         self.temp_raw = int(self.file.read().strip())
         logging.debug(self.temp_raw)
         self.temp = float(self.temp_raw / 1000.0)
         microdotphat.write_string("%.2f" % self.temp + "c", kerning=False)
-
-    def run_once(self):
+        logging.debug("Displaying temperature: %.2f" % self.temp + "c")
         microdotphat.show()
 
 

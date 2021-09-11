@@ -14,6 +14,8 @@ class App:
         microdotphat.write_string(self.text, offset_x=0)
 
     def run_once(self):
+        microdotphat.clear()
+        microdotphat.write_string(self.text, offset_x=0)
         microdotphat.scroll()
         microdotphat.show()
 

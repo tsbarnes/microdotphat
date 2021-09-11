@@ -17,7 +17,13 @@ class MicroDotPHAT:
         logging.basicConfig(level=settings.LOGLEVEL)
 
         for module_name in settings.MODULES:
-            self.modules.append(importlib.import_module(module_name))
+            try:
+                self.modules.append(importlib.import_module(module_name))
+            except ModuleNotFoundError:
+                try:
+                    self.modules.append(importlib.import_module("apps." + module_name))
+                except ModuleNotFoundError:
+                    logging.error("Couldn't load app '{0}'".format(module_name))
 
         self.mq = posix_ipc.MessageQueue("/microdotphat_ipc", flags=posix_ipc.O_CREAT)
         self.mq.block = False

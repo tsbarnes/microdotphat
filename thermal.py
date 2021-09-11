@@ -17,7 +17,6 @@ class App:
         logging.debug(self.temp_raw)
         self.temp = float(self.temp_raw / 1000.0)
         microdotphat.write_string("%.2f" % self.temp + "c", kerning=False)
-        logging.debug("Displaying temperature: %.2f" % self.temp + "c")
         microdotphat.show()
 
 

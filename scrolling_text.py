@@ -3,10 +3,11 @@ import logging
 import sys
 import time
 import microdotphat
+import socket
 
 
 class App:
-    text = "Waiting...      "
+    text = " * " + socket.gethostname() + " *  "
 
     def write(self, text=None):
         if text:

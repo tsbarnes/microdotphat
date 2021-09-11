@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 import psutil
-from time import sleep
+import sys
+import time
 from microdotphat import set_col, show, clear
 
 

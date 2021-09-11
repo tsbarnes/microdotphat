@@ -8,12 +8,19 @@ from apps import AbstractApp
 
 class App(AbstractApp):
     mq: posix_ipc.MessageQueue = None
+    text: str = settings.WEBTEXT_DEFAULT
 
     def __init__(self):
         self.reload()
 
+    def write(self, text=None):
+        if text:
+            self.text = text
+        clear()
+        write_string(self.text)
+
     def reload(self):
-        write_string(settings.WEBTEXT_DEFAULT)
+        self.write()
         if not self.mq:
             self.init_mq()
 
@@ -37,8 +44,7 @@ class App(AbstractApp):
                 message = None
 
             if message:
-                clear()
-                write_string(" " + message[0].decode() + " ")
+                self.write(" " + message[0].decode() + " ")
 
 
 if __name__ == '__main__':

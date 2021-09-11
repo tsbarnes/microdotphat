@@ -1,16 +1,14 @@
 #!/usr/bin/env python
-
 import psutil
-import sys
 import time
 from microdotphat import set_col, show, clear
 
 
-class Graph:
+class App:
     graph = []
     filled = True
 
-    def iterate_loop(self):
+    def run_once(self):
         clear()
 
         cpu_percent = psutil.cpu_percent()
@@ -36,12 +34,10 @@ class Graph:
 
         show()
 
-    def main_loop(self):
-        while True:
-            self.iterate_loop()
-            sleep(1)
-
 
 if __name__ == '__main__':
-    graph = Graph()
-    graph.main_loop()
+    app = App()
+
+    while True:
+        app.run_once()
+        time.sleep(1)

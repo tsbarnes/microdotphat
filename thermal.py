@@ -1,27 +1,30 @@
 #!/usr/bin/env python
-
-import datetime
+import logging
 import time
+import microdotphat
 
-from microdotphat import write_string, set_decimal, clear, show
+
+class App:
+    path = "/sys/class/thermal/thermal_zone0/temp"
+    file = None
+    temp_raw = None
+    temp = None
+
+    def __init__(self):
+        microdotphat.clear()
+        self.file = open(self.path, "r")
+        self.temp_raw = int(self.file.read().strip())
+        logging.debug(self.temp_raw)
+        self.temp = float(self.temp_raw / 1000.0)
+        microdotphat.write_string("%.2f" % self.temp + "c", kerning=False)
+
+    def run_once(self):
+        microdotphat.show()
 
 
-print("""Thermal
+if __name__ == '__main__':
+    app = App()
 
-Displays the temperature measured from thermal zone 0, using
-/sys/class/thermal/thermal_zone0/temp
-
-Press Ctrl+C to exit.
-""")
-
-delay = 1
-
-while True:
-    clear()
-    path="/sys/class/thermal/thermal_zone0/temp"
-    f = open(path, "r")
-    temp_raw = int(f.read().strip())
-    temp = float(temp_raw / 1000.0)
-    write_string( "%.2f" % temp + "c", kerning=False)
-    show()
-    time.sleep(delay)
+    while True:
+        app.run_once()
+        time.sleep(1)

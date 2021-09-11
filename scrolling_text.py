@@ -1,28 +1,30 @@
-#!/usr/bin/env python
-
-import time
+#!/usr/bin/env python3
+import logging
 import sys
-             
-from microdotphat import write_string, scroll, show
+import time
+import microdotphat
 
 
-print("""Scrolling Text
+class App:
+    text = "Waiting...      "
 
-Scrolls a message across the screen.
+    def write(self, text=None):
+        if text:
+            self.text = text
+        microdotphat.write_string(self.text, offset_x=0)
 
-Usage: {name} "your message"
+    def run_once(self):
+        microdotphat.scroll()
+        microdotphat.show()
 
-Press Ctrl+C to exit.
-""".format(name=sys.argv[0]))
 
-text = "In the old #BILGETANK we'll keep you in the know!      "
+if __name__ == '__main__':
+    app = App()
 
-if len(sys.argv) > 1:
-    text = sys.argv[1]
+    if len(sys.argv) > 1:
+        app.text = " ".join(sys.argv[1:])
 
-write_string(text, offset_x=0)
-
-while True:
-    scroll()
-    show()
-    time.sleep(0.05)
+    while True:
+        app.write()
+        app.run_once()
+        time.sleep(1)

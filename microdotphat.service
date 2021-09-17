@@ -6,7 +6,7 @@ After=local-fs.target network.target
 Type=simple
 ExecStart=/usr/bin/python3 /home/pi/microdotphat/app.py
 User=pi
-Restart=always
+Restart=on-failure
 
 [Install]
 WantedBy=default.target
